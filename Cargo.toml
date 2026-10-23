@@ -1,0 +1,33 @@
+[workspace]
+members = [
+    "core/native",
+    "apps/1.updater",
+    "apps/5.weak_cloud",
+    "apps/6.weak_office",
+    "apps/9.google_lite",
+    "apps/10.weak_store"
+]
+resolver = "2"
+
+[package]
+name = "weakdows_core"
+version = "1.0.0"
+edition = "2021"
+authors = ["Weakdows OS Team"]
+description = "Universal lightweight hybrid operating system core"
+
+[[bin]]
+name = "stream_engine"
+path = "apps/5.weak_cloud/stream_engine.rs"
+
+[[bin]]
+name = "memory_buffer"
+path = "apps/6.weak_office/memory_buffer.rs"
+
+[[bin]]
+name = "core_assistant"
+path = "apps/9.google_lite/core_assistant.rs"
+
+[[bin]]
+name = "package_fetcher"
+path = "apps/10.weak_store/package_fetcher.rs"

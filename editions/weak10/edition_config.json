@@ -1,0 +1,18 @@
+{
+  "edition_name": "Weak10 Speed Edition",
+  "version": "1.0.0",
+  "ui_theme": "Modern Dark Minimalist",
+  "default_wallpaper": "win10_dark_speed.png",
+  "target_specs": {
+    "min_ram_mb": 1024,
+    "recommended_ram_mb": 2048,
+    "architecture": "x86_x64_ARM64"
+  },
+  "features": {
+    "w_reg_engine": true,
+    "debloated_apps": true,
+    "cortana_disabled": true,
+    "xforce_cloud_ready": true,
+    "telemetry_enabled": false
+  }
+}

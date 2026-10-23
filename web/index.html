@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weakdows OS | نظام التشغيل الخفيف والذكي</title>
+    <!-- ربط ملف التنسيقات CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- خط Tajawal لتصميم أنيق وعصري -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- شريط الملاحة علوي -->
+    <header class="navbar">
+        <div class="logo-container">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-text">Weakdows <span class="highlight">OS</span></span>
+        </div>
+        <nav class="nav-links">
+            <a href="#hero">الرئيسية</a>
+            <a href="#editions">الإصدارات</a>
+            <a href="#audio-preview">استماع للأصوات</a>
+            <a href="#apps">التطبيقات</a>
+        </nav>
+        <button id="quick-download-btn" class="btn-download-nav">تحميل ISO</button>
+    </header>
+
+    <!-- واجهة البداية الرئيسي (Hero Section) -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="badge">🚀 مشروع مفتوح المصدر (MIT)</div>
+            <h1>أحيِ جهازك القديم مع قوة <br><span class="cyber-text">Weakdows OS</span></h1>
+            <p>نظام تشغيل ثوري خفيف، يدمج بين استقرار ويندوز الكلاسيكي، وسرعة المستقبل، مع بروفايلات ديسكورد والأنماط المستقبلية السيبرانية.</p>
+            
+            <div class="hero-actions">
+                <button id="auto-detect-btn" class="btn-primary">
+                    <span class="btn-icon">🔍</span>
+                    التعرف على النظام والتحميل المباشر
+                </button>
+                <a href="#editions" class="btn-secondary">استعراض النسخ الأربع</a>
+            </div>
+
+            <div id="detection-result" class="detection-box hidden">
+                <p id="detection-text">جاري فحص عتاد جهازك...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأغراض والإصدارات الأربعة -->
+    <section id="editions" class="section-container">
+        <h2 class="section-title">إصدارات Weakdows العريقة</h2>
+        <p class="section-subtitle">اختر النسخة التي تناسب مواصفات حاسوبك وطابعك المفضل</p>
+
+        <div class="editions-grid">
+            <!-- WeakXP -->
+            <div class="edition-card xp">
+                <div class="edition-badge">Retro Synthwave</div>
+                <h3>WeakXP</h3>
+                <p>خفة مطلقة للأجهزة القديمة جداً، مع طابع الثمانينات المستقبلية ونغمات ديسكورد الهجينة.</p>
+                <button class="btn-card-download" data-edition="xp">تحميل WeakXP</button>
+            </div>
+
+            <!-- Weak7 -->
+            <div class="edition-card weak7">
+                <div class="edition-badge">Liquid Glass</div>
+                <h3>Weak7</h3>
+                <p>جمال زجاج Aero الأنيق مع أداء مستقر ولمسات هولوجرافية مائية خفيفة.</p>
+                <button class="btn-card-download" data-edition="weak7">تحميل Weak7</button>
+            </div>
+
+            <!-- Weak10 -->
+            <div class="edition-card weak10">
+                <div class="edition-badge">Cyberpunk Pulse</div>
+                <h3>Weak10</h3>
+                <p>تصميم عصري سريع للغاية لخوض الألعاب والمهام اليومية بنبض النيون السيبراني.</p>
+                <button class="btn-card-download" data-edition="weak10">تحميل Weak10</button>
+            </div>
+
+            <!-- Weak11 -->
+            <div class="edition-card weak11">
+                <div class="edition-badge">Quantum AI</div>
+                <h3>Weak11</h3>
+                <p>الواجهة الأحدث مع التجاوز التام لقيود العتاد (TPM/Secure Boot) وبطابع كمومي هادئ.</p>
+                <button class="btn-card-download" data-edition="weak11">تحميل Weak11</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المعاينة الصوتية التفاعلية -->
+    <section id="audio-preview" class="section-container audio-section">
+        <h2 class="section-title">🔊 استمع للبروفايلات الصوتية</h2>
+        <p class="section-subtitle">اختر الإصدار والنمط الصوتي لتجربة المؤثرات الصوتية مباشرة</p>
+
+        <div class="audio-controls">
+            <div class="selector-group">
+                <label>الإصدار:</label>
+                <select id="audio-edition-select">
+                    <option value="xp">WeakXP</option>
+                    <option value="weak7">Weak7</option>
+                    <option value="weak10">Weak10</option>
+                    <option value="weak11" selected>Weak11</option>
+                </select>
+            </div>
+
+            <div class="selector-group">
+                <label>نمط الصوت:</label>
+                <select id="audio-profile-select">
+                    <option value="normal">العادي (Normal)</option>
+                    <option value="discord">هجين ديسكورد (Discord Hybrid)</option>
+                    <option value="futuristic" selected>المستقبلي (Futuristic)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="sound-buttons-grid">
+            <button class="btn-sound" data-event="startup">▶️ تشغيل (Startup)</button>
+            <button class="btn-sound" data-event="shutdown">⏹️ إغلاق (Shutdown)</button>
+            <button class="btn-sound" data-event="error">⚠️ خطأ (Error)</button>
+            <button class="btn-sound" data-event="notify">🔔 تنبيه (Notify)</button>
+            <button class="btn-sound" data-event="uac_prompt">🛡️ مسؤول (UAC)</button>
+        </div>
+        
+        <div id="audio-status" class="audio-status-text">اضغط على أي زر للاستماع للصوت المقترن به</div>
+    </section>
+
+    <!-- التذييل السفلي -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 <strong>Weakdows OS Project</strong>. مرخص تحت رخصة <strong>MIT</strong> مفتوحة المصدر.</p>
+            <p class="footer-subtext">تم بناء النظام بخفة مطلق ليعمل على جميع الأجهزة دون استهلاك الموارد.</p>
+        </div>
+    </footer>
+
+    <!-- ربط ملف البرمجة والتفاعل JS -->
+    <script src="detect.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "edition_name": "Weak11 Ultra Fast Edition",
+  "version": "1.0.0",
+  "ui_theme": "Modern Weak11 Fluent-Lite",
+  "default_wallpaper": "weak11_bloom_speed.png",
+  "target_specs": {
+    "min_ram_mb": 1536,
+    "recommended_ram_mb": 2048,
+    "architecture": "x86_x64_ARM64"
+  },
+  "features": {
+    "w_reg_engine": true,
+    "tpm_bypass_preinstalled": true,
+    "secureboot_bypass_preinstalled": true,
+    "xforce_cloud_ready": true,
+    "telemetry_enabled": false
+  }
+}

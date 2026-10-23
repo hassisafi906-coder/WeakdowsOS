@@ -1,0 +1,12 @@
+{
+  "suite_name": "Google Lite Suite for Weakdows",
+  "version": "1.0.0",
+  "architecture": "hybrid",
+  "components": {
+    "browser": "weak_chrome_lite.cpp",
+    "streaming": "weak_youtube.rs",
+    "cloud": "weak_drive.cpp",
+    "assistant": "core_assistant.rs"
+  },
+  "optimization": "zero_bloatware_high_speed"
+}

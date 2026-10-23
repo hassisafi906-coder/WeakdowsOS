@@ -1,0 +1,17 @@
+{
+  "edition_name": "Weak7 Classic Aero Edition",
+  "version": "1.0.0",
+  "ui_theme": "Aero Glass Ultra-Lite",
+  "default_wallpaper": "win7_harmony.png",
+  "target_specs": {
+    "min_ram_mb": 512,
+    "recommended_ram_mb": 1024,
+    "architecture": "x86_x64"
+  },
+  "features": {
+    "w_reg_engine": true,
+    "aero_glass_optimized": true,
+    "xforce_cloud_ready": true,
+    "telemetry_enabled": false
+  }
+}

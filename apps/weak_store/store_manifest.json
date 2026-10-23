@@ -1,0 +1,13 @@
+{
+  "store_name": "Weak Store Lite",
+  "version": "1.0.0",
+  "backend_engine": "weak_store_engine.cpp",
+  "package_fetcher": "package_fetcher.rs",
+  "categories": [
+    "productivity",
+    "browsers",
+    "multimedia",
+    "system_tools"
+  ],
+  "max_ram_usage_mb": 15
+}

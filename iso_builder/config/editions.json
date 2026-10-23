@@ -1,0 +1,31 @@
+{
+  "project": "Weakdows OS",
+  "version": "1.0.0",
+  "architecture": "Universal (x86, x64, ARM)",
+  "editions": {
+    "weakxp": {
+      "name": "Weakdows XP Lite",
+      "target_ram_mb": 256,
+      "registry_mode": "W-Reg Ultra",
+      "description": "Stone-age retro edition for extreme legacy hardware."
+    },
+    "weak7": {
+      "name": "Weak7 Classic Aero",
+      "target_ram_mb": 512,
+      "registry_mode": "W-Reg Optimized",
+      "description": "The legendary Windows 7 layout stripped of all background telemetry."
+    },
+    "weak10": {
+      "name": "Weak10 Speed Edition",
+      "target_ram_mb": 1024,
+      "registry_mode": "W-Reg Modular",
+      "description": "Modern Windows 10 experience without telemetry, Cortana, and bloatware."
+    },
+    "weak11": {
+      "name": "Weak11 Ultra Fast",
+      "target_ram_mb": 1536,
+      "registry_mode": "W-Reg Advanced",
+      "description": "Cutting edge UI with TPM and Secure Boot constraints completely bypassed."
+    }
+  }
+}

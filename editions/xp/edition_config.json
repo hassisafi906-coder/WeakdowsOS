@@ -1,0 +1,17 @@
+{
+  "edition_name": "WeakXP Stone-Age Edition",
+  "version": "1.0.0",
+  "ui_theme": "Classic Bliss Aero-Lite",
+  "default_wallpaper": "bliss_classic.png",
+  "target_specs": {
+    "min_ram_mb": 256,
+    "recommended_ram_mb": 512,
+    "architecture": "x86_x64"
+  },
+  "features": {
+    "w_reg_engine": true,
+    "legacy_hardware_support": true,
+    "xforce_cloud_ready": true,
+    "telemetry_enabled": false
+  }
+}

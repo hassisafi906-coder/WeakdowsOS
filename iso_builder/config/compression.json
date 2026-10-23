@@ -1,0 +1,13 @@
+{
+  "compression_algorithm": "LZMA2",
+  "compression_level": 9,
+  "block_size": "64M",
+  "optimize_for": "maximum_speed_and_minimal_size",
+  "exclude_extensions": [
+    ".tmp",
+    ".log",
+    ".bak",
+    "Thumbs.db",
+    ".DS_Store"
+  ]
+}
