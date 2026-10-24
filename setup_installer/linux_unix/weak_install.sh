@@ -1,75 +1,89 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 # ==============================================================================
-# Weakdows OS - Direct Installer for Linux/Unix Systems
+# WeakdowsOS - Universal Linux/Unix Package Installer
 # ==============================================================================
 
-set -e
-
-# ألوان للتنسيق في التيرمينال
-RED='\033[0;31m'
+# الألوان لتنسيق مخرجات الطرفية
 GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}==========================================${NC}"
-echo -e "${BLUE}  Weakdows OS - Linux/Unix Direct Setup   ${NC}"
-echo -e "${BLUE}==========================================${NC}"
-echo ""
+echo -e "${BLUE}=====================================================${NC}"
+echo -e "${BLUE}     WeakdowsOS - Universal Linux/Unix Installer     ${NC}"
+echo -e "${BLUE}=====================================================${NC}"
 
-# 1. التحقق من صلاحيات ROOT
+# 1. التحقق من صلاحيات Root / Sudo
 if [ "$EUID" -ne 0 ]; then
-  echo -e "${RED}[!] Error: Please run this script with sudo or as root.${NC}"
+  echo -e "${RED}[!] يرجى تشغيل السكربت بصلاحيات الجذر (sudo ./weak_install.sh)${NC}"
   exit 1
 fi
 
-echo -e "${GREEN}[✓] Root privileges confirmed.${NC}"
+# 2. تحديد المسارات الأساسية
+INSTALL_DIR="/opt/weakdows_os"
+DESKTOP_ENTRY="/usr/share/applications/weakdows_os.desktop"
+ISO_NAME="Weakdows_OS_v26H2.iso"
 
-# 2. البحث عن ملف الـ ISO الخاص بالنظام
-ISO_PATH="../../Weakdows_OS_Universal.iso"
-if [ ! -f "$ISO_PATH" ]; then
-    ISO_PATH="./Weakdows_OS_Universal.iso"
-fi
-
-if [ -f "$ISO_PATH" ]; then
-    echo -e "${GREEN}[✓] Located ISO Image: $ISO_PATH${NC}"
+# البحث عن ملف الـ ISO في مجلدات المشروع
+ISO_PATH=""
+if [ -f "../../$ISO_NAME" ]; then
+    ISO_PATH="../../$ISO_NAME"
+elif [ -f "./$ISO_NAME" ]; then
+    ISO_PATH="./$ISO_NAME"
+elif [ -f "../$ISO_NAME" ]; then
+    ISO_PATH="../$ISO_NAME"
 else
-    echo -e "${RED}[!] Warning: Weakdows_OS_Universal.iso not found in target path.${NC}"
-    echo "    Please make sure the ISO file is present in the project folder."
+    echo -e "${RED}[!] خطأ: لم يتم العثور على ملف $ISO_NAME في مسارات المشروع!${NC}"
+    echo -e "${YELLOW}تأكد من وجود ملف الآيزو في مجلد المشروع الرئيسي.${NC}"
+    exit 1
 fi
 
-# 3. إعداد خيار الإقلاع المباشر في GRUB
-echo -e "\n[*] Preparing direct boot entry for GRUB..."
+echo -e "${GREEN}[✔] تم العثور على حزمة النظام: $ISO_PATH${NC}"
 
-GRUB_ENTRY="/etc/grub.d/40_custom"
+# 3. إنشاء دليل التثبيت المستقل
+echo -e "${YELLOW}[*] جاري تجهيز مجلد التثبيت في $INSTALL_DIR...${NC}"
+mkdir -p "$INSTALL_DIR"
 
-if [ -f "$GRUB_ENTRY" ]; then
-    echo -e "[-] Adding Weakdows OS entry to $GRUB_ENTRY..."
-    cat << 'EOF' >> /etc/grub.d/40_custom
+# 4. استخراج حزمة النظام باستخدام الأدوات المتاحة في التوزيعة
+echo -e "${YELLOW}[*] جاري استخراج وتثبيت حزمة WeakdowsOS...${NC}"
 
-menuentry "Weakdows OS - Direct Installer" {
-    insmod part_msdos
-    insmod part_gpt
-    insmod ntfs
-    insmod ext2
-    set root='(hd0,1)'
-    echo 'Loading Weakdows OS Installer...'
-    # يتم هنا توجيه الإقلاع لملف الـ ISO أو بيئة WinPE المجهزة
-}
+if command -v 7z &> /dev/null; then
+    7z x "$ISO_PATH" -o"$INSTALL_DIR" -y > /dev/null
+    echo -e "${GREEN}[✔] تم استخراج الحزمة بنجاح باستخدام 7z.${NC}"
+elif command -v bsdtar &> /dev/null; then
+    bsdtar -xf "$ISO_PATH" -C "$INSTALL_DIR"
+    echo -e "${GREEN}[✔] تم استخراج الحزمة بنجاح باستخدام bsdtar.${NC}"
+elif command -v xorriso &> /dev/null; then
+    xorriso -osirrax on -indev "$ISO_PATH" -extract / "$INSTALL_DIR" &> /dev/null
+    echo -e "${GREEN}[✔] تم استخراج الحزمة بنجاح باستخدام xorriso.${NC}"
+else
+    echo -e "${RED}[!] خطأ: لم يتم العثور على أداة استخراج (7z أو bsdtar أو xorriso).${NC}"
+    echo -e "${YELLOW}يرجى تثبيت p7zip أو bsdtar عبر مدير الحزم الخاص بتوزيعتك.${NC}"
+    exit 1
+fi
+
+# 5. ضبط الصلاحيات للملفات المستخرجة
+chmod -R 755 "$INSTALL_DIR"
+
+# 6. إنشاء اختصار في قائمة تطبيقات لينكس (Desktop Entry)
+echo -e "${YELLOW}[*] جاري إضافة اختصار WeakdowsOS إلى قائمة التطبيقات...${NC}"
+cat <<EOF > "$DESKTOP_ENTRY"
+[Desktop Entry]
+Type=Application
+Name=WeakdowsOS
+Comment=Weakdows OS Deployment Package
+Exec=xdg-open $INSTALL_DIR
+Icon=system-run
+Terminal=false
+Categories=System;
 EOF
-    echo -e "${GREEN}[✓] GRUB entry added successfully.${NC}"
-    
-    # تحديث GRUB إذا كانت الأداة متوفرة
-    if command -v update-grub &> /nul; then
-        echo "[-] Updating GRUB configuration..."
-        update-grub
-    elif command -v grub-mkconfig &> /dev/null; then
-        echo "[-] Updating GRUB configuration..."
-        grub-mkconfig -o /boot/grub/grub.cfg
-    fi
-else
-    echo -e "${RED}[!] GRUB configuration file not found. Manual boot setup required.${NC}"
-fi
 
-echo ""
-echo -e "${GREEN}[SUCCESS] Linux/Unix setup configuration completed!${NC}"
-echo "Reboot your machine to enter Weakdows OS Direct Setup."
+chmod +x "$DESKTOP_ENTRY"
+
+echo -e "${GREEN}=====================================================${NC}"
+echo -e "${GREEN}[✔] اكتمل تثبيت WeakdowsOS بنجاح على النظام!${NC}"
+echo -e "${GREEN}[✔] مسار التثبيت: $INSTALL_DIR${NC}"
+echo -e "${GREEN}[✔] يمكنك الآن الوصول للنظام من قائمة التطبيقات.${NC}"
+echo -e "${GREEN}=====================================================${NC}"
